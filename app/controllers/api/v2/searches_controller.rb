@@ -15,13 +15,15 @@ module Api
       end
 
       def azure
-        @search = ApiAzureSearch.new @search_options.attributes
+        @search_options.site.search_engine = 'SearchGov'
+        @search = ApiAzureI14ySearch.new @search_options.attributes
         @search.run
         respond_with @search
       end
 
       def azure_web
-        @search = ApiAzureCompositeWebSearch.new @search_options.attributes
+        @search_options.site.search_engine = 'SearchGov'
+        @search = ApiAzureWebI14ySearch.new @search_options.attributes
         @search.run
         respond_with @search
       end
@@ -125,11 +127,9 @@ module Api
 
       def search_options_validator_klass
         case action_name.to_sym
-        when :azure then Api::CommercialSearchOptions
-        when :azure_web then Api::AzureCompositeWebSearchOptions
         when :azure_image then Api::AzureCompositeImageSearchOptions
         when :bing then Api::SecretAPISearchOptions
-        when :blended, :i14y, :video then Api::NonCommercialSearchOptions
+        when :azure, :azure_web, :blended, :i14y, :video then Api::NonCommercialSearchOptions
         when :gss then Api::GssSearchOptions
         when :docs then Api::DocsSearchOptions
         end
