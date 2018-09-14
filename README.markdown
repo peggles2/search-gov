@@ -95,6 +95,16 @@ To change the defaults, like number of shards/replicas, edit this file:
     index.number_of_shards: 1
     index.number_of_replicas: 0
 
+In order to run multiple versions of Elasticsearch (necessary for I14y),
+you'll need to specify a unique `cluster.name` and port for your 1.7 cluster:
+
+    cluster.name: elasticsearch_17
+    http.port: 9217
+
+Optionally, you can also specify the `node.name`:
+
+    node.name: "usasearch"
+
 For the time being, add this to the end of the file to re-enable MVEL scripting for sandboxed languages like Groovy:
 
     script.disable_dynamic: false
@@ -125,6 +135,10 @@ Now restart it:
 
     $ launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.elasticsearch17.plist
     $ launchctl load ~/Library/LaunchAgents/homebrew.mxcl.elasticsearch17.plist
+
+After restarting, verify that your cluster is now running on port 9217:
+
+    $ curl localhost:9217
 
 If you aren't using Homebrew to install and configure Elasticsearch, follow the [instructions](http://www.elasticsearch.org/download/) to download and run it.
 
