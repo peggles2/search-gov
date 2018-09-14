@@ -135,7 +135,7 @@ jobs:
       - run:
           name: Run Tests
           command: |
-            /home/circleci/search-gov/elasticsearch-1.7.3/bin/elasticsearch -d -E http.port=9217
+            /home/circleci/search-gov/elasticsearch-1.7.3/bin/elasticsearch -d --http.port=9217
             sleep 10
             bundle exec rake usasearch:elasticsearch:create_indexes
 
@@ -206,7 +206,7 @@ jobs:
       - run:
           name: Run Tests
           command: |
-            /home/circleci/search-gov/elasticsearch-1.7.3/bin/elasticsearch -d -E http.port=9217
+            /home/circleci/search-gov/elasticsearch-1.7.3/bin/elasticsearch -d --http.port=9217
             sleep 10
             bundle exec rake usasearch:elasticsearch:create_indexes
 
