@@ -16,6 +16,7 @@ class GovboxSet
               :video_news_items
 
   def initialize(query, affiliate, geoip_info, options = {})
+    Rails.logger.info "geoip info: #{geoip_info}"
     @query, @affiliate, @geoip_info = query, affiliate, geoip_info
     @highlighting_options = options.slice(:highlighting, :pre_tags, :post_tags)
     @base_search_options = @highlighting_options.merge(
@@ -116,6 +117,7 @@ class GovboxSet
     jobs_options = { Keyword: @query, ResultsPerPage: 10 }
     org_hash = { Organization: @affiliate.agency&.joined_organization_codes }
     jobs_options.merge!(org_hash)
+    Rails.logger.info "location: #{@geoip_info&.location_name}"
     jobs_options.merge!(LocationName: @geoip_info&.location_name)
     jobs_options.compact
   end
