@@ -28,6 +28,7 @@ module Jobs
   end
 
   def self.search(options)
+    Rails.logger.info "Running job search with options #{options}"
     @usajobs_api_connection.get(@endpoint, options).body if query_eligible?(options[:Keyword])
   rescue => error
     Rails.logger.error("Trouble fetching jobs information: #{error}")
