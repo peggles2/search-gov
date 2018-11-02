@@ -20,7 +20,7 @@ class SearchesController < ApplicationController
   def index
     search_klass, @search_vertical, template = pick_klass_vertical_template
     @search = search_klass.new(@search_options.merge(geoip_info: GeoipLookup.lookup(request.remote_ip)))
-    Rails.logger.info "WTF. IP: #{request.remote_ip}, options: #{@search_options}"
+    Rails.logger.info "WTF. IP: #{request.remote_ip}, geoip: #{GeoipLookup.lookup(request.remote_ip)}"
     @search.run
     @form_path = search_path
     @page_title = @search.query
