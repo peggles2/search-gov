@@ -80,7 +80,6 @@ gem 'test-unit', '~> 3.2.7'
 gem 'http', '~> 1.0'
 gem 'robots_tag_parser', '~> 0.1.0', git: 'https://github.com/GSA/robots_tag_parser'
 gem 'loofah', '~> 2.2.2'
-gem 'protected_attributes', '~> 1.1.4'
 # Using custom branch until https://github.com/brutuscat/medusa/issues/10 is merged
 gem 'medusa', git: 'https://github.com/MothOnMars/medusa', branch: 'clean_urls'
 # Robotex is required by Medusa. Specifying fork until https://github.com/chriskite/robotex/issues/4
@@ -89,7 +88,6 @@ gem 'robotex', git: 'https://github.com/MothOnMars/robotex'
 # Using custom branch until https://github.com/lygaret/sitemaps/pull/4 is merged,
 # and https://github.com/lygaret/sitemaps/issues/5 and https://github.com/lygaret/sitemaps/issues/6 are resolved
 gem 'sitemaps_parser', require: 'sitemaps', git: 'https://github.com/MothOnMars/sitemaps', branch: 'discovery_fixes'
-gem 'public_suffix', '~> 3.0.2'
 gem 'counter_culture', '~> 2.0.0'
 gem 'aasm', '~> 4.12'
 gem 'active_scheduler', '~> 0.5.0'
