@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-
 gem 'rake', '~> 12.3.2'
 gem 'rails', '= 4.2.11'
 gem 'rails-observers', '~> 0.1.5'
