@@ -43,40 +43,5 @@ describe FeaturedCollectionLink do
         end
       end
     end
-
-    context "when the URL starts with http(s):// prefix" do
-      url = 'usasearch.howto.gov/post/9866782725/did-you-mean-roes-or-rose'
-      prefixes = %w( http:// https:// HTTP:// HTTPS:// )
-      prefixes.each_with_index do |prefix, index|
-        specify do
-          featured_collection = FeaturedCollection.new(:title => 'Search USA Blog',
-                                                       :status => 'active',
-                                                       :publish_start_on => '07/01/2011',
-                                                       :affiliate => @affiliate)
-          featured_collection.featured_collection_links.build(:title => 'Did You Mean Roes or Rose?',
-                                                              :url => "#{prefix}#{url}",
-                                                              :position => index)
-          featured_collection.save!
-          expect(featured_collection.featured_collection_links.first.url).to eq("#{prefix}#{url}")
-        end
-      end
-    end
-  end
-
-  describe '#dup' do
-    subject(:original_instance) do
-      fc = FeaturedCollection.new(affiliate: @affiliate,
-                                  publish_start_on: '07/01/2011',
-                                  status: 'active',
-                                  title: 'Search USA Blog')
-      fc.featured_collection_links.build(position: 0,
-                                         title: 'Did You Mean Roes or Rose?',
-                                         url: 'http://search.digital.gov/blog/1')
-      fc.save!
-      fc.featured_collection_links.first
-    end
-
-    include_examples 'dupable',
-                     %w(featured_collection_id)
   end
 end
