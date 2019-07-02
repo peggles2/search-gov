@@ -6,6 +6,7 @@ class Admin::SuperfreshUrlsBulkUploadController < Admin::AdminController
   end
 
   def upload
+    binding.pry
     file = params[:superfresh_urls]
     if file.present? and VALID_CONTENT_TYPES.include?(file.content_type)
       begin
