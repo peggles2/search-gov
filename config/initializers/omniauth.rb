@@ -1,7 +1,7 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :login_dot_gov, {
     name: :logindotgov,
-    client_id: 'urn:gov:gsa:openidconnect.profiles:sp:sso:gsa:search',
+    client_id: 'urn:gov:gsa:openidconnect.profiles:sp:sso:gsa:local_search',
     idp_base_url: 'https://idp.int.identitysandbox.gov',
     ial: 1,
     private_key: OpenSSL::PKey::RSA.new(File.read('config/logindotgov.pem')),

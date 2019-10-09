@@ -11,6 +11,8 @@ require 'cucumber/rails'
 require 'capybara/rails'
 require 'email_spec/cucumber'
 require 'capybara-screenshot/cucumber'
+#require  Rails.root.join('spec/support/omniauth_helpers')
+
 
 # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
 # order to ease the transition to Capybara we set the default here. If you'd
@@ -63,6 +65,8 @@ module ScenarioStatusTracker
   self.success = true
 end
 
+OmniAuth.config.test_mode = true
+
 require_relative '../../spec/test_services.rb'
 unless ENV['TRAVIS']
   TestServices::start_redis
@@ -79,3 +83,7 @@ at_exit do
   exit ScenarioStatusTracker.success
 end
 Capybara.asset_host = "http://localhost:3000"
+
+After('@omniauth_test') do
+  OmniAuth.config.test_mode = false
+end

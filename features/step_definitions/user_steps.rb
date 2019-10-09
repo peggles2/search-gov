@@ -1,8 +1,20 @@
-Given /^I am logged in with email "([^\"]*)"$/ do |email|
-  visit login_path
-  fill_in "user_session[email]", with: email
-  fill_in "user_session[password]", with: 'test1234!'
-  click_button('Login')
+Given /^I am logged in with email "([^"]*)"$/ do |email|
+  OmniAuth.config.test_mode = true
+
+  OmniAuth.config.add_mock('logindotgov', {
+    uid: 'test_123',
+    info: {
+      email: email
+    }
+  })
+  visit '/auth/logindotgov'
+end
+
+Then /^I am redirected to "([^\"]*)"$/ do |url|
+  assert [301, 302].include?(@integration_session.status), "Expected status to be 301 or 302, got #{@integration_session.status}"
+  location = @integration_session.headers["Location"]
+  assert_equal url, location
+  visit location
 end
 
 Given /^I (?:log in) with email "([^\"]*)" and password "([^\"]*)"$/ do |email, password|

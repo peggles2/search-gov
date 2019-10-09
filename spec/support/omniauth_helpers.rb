@@ -13,5 +13,6 @@ module OmniauthHelpers
     }
 
     OmniAuth.config.add_mock(:login_dot_gov, omniauth_hash)
+
   end
 end

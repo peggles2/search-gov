@@ -22,7 +22,7 @@ Feature: Dashboard
 
   Scenario: Viewing a site without logging in
     When I go to the usagov's Dashboard page
-    Then I should see "Login" button
+    Then I am redirected to "/auth/login"
 
   Scenario: Viewing a site after logging in
     Given I am logged in with email "affiliate_manager@fixtures.org"
@@ -153,6 +153,8 @@ Feature: Dashboard
     When I press "Remove" within the first table body row
     Then I should see "You have removed admin@email.gov from this site"
 
+  # to be updated in SRCH-891 for login.gov
+  @wip
   @javascript
   Scenario: Complete sign up process
     Given no emails have been sent
