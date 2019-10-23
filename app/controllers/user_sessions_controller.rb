@@ -1,7 +1,6 @@
 class UserSessionsController < ApplicationController
-  before_filter :reset_session, only: [:destroy]
-  before_filter :require_no_user, :only => [:new, :create]
-  before_filter :require_user, :only => :destroy
+  before_action :reset_session, only: [:destroy]
+  before_action :require_user, only: :destroy
 
   def security_notification; end
 
@@ -32,12 +31,5 @@ class UserSessionsController < ApplicationController
       end
     @user_session.secure = Rails.application.config.ssl_options[:secure_cookies]
   end
-
-  def user_session_params
-    params.require(:user_session).permit(:email)
-  end
-
-  def redirection_path
-    @user_session.user.is_developer? ? developer_redirect_url : sites_path
-  end
 end
+
