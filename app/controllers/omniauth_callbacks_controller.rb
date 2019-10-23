@@ -7,8 +7,17 @@ class OmniauthCallbacksController < ApplicationController
     return unless @user.persisted?
 
     reset_session
-    UserSession.create(@user)
-
+    set_user_session
     redirect_to(admin_home_page_path)
+  end
+end
+
+private
+
+def set_user_session
+  @user_session = UserSession.create(@user)
+
+  if @user_session.present?
+    @user_session.secure = Rails.application.config.ssl_options[:secure_cookies]
   end
 end
