@@ -6,7 +6,9 @@ class OmniauthCallbacksController < ApplicationController
     @user = User.from_omniauth(auth)
     return unless @user.persisted?
 
-    set_user_session
+    reset_session
+    UserSession.create(@user)
+
     redirect_to(admin_home_page_path)
   end
 
