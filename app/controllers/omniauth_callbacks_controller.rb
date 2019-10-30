@@ -8,6 +8,7 @@ class OmniauthCallbacksController < ApplicationController
 
     reset_session
     set_user_session
+
     redirect_to(admin_home_page_path)
   end
 

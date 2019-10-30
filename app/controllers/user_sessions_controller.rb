@@ -8,20 +8,7 @@ class UserSessionsController < ApplicationController
 
   def destroy
     current_user_session.destroy
-    redirect_back_or_default login_url
-  end
-
-  private
-
-  def construct_user_session(params = nil)
-    @user_session =
-      case params
-      when nil
-        UserSession.new
-      else
-        UserSession.new(params)
-      end
-    @user_session.secure = Rails.application.config.ssl_options[:secure_cookies]
+    redirect_to(login_path)
   end
 end
 
