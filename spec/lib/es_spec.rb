@@ -98,7 +98,6 @@ describe ES do
         expect(es_config['writers']).to be_frozen
       end
 
->>>>>>> 3717be9e98e28f038f4de99f8a61aeb6896a37ac
       it_behaves_like 'an Elasticsearch client'
     end
   end
